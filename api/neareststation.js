@@ -3,7 +3,8 @@
 const express = require("express");
 const router = express.Router();
 //const fetch = require("node-fetch");
-import fetch from 'node-fetch';
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 
 const all_station_data = {
     "fob": [
