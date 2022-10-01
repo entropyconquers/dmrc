@@ -1517,8 +1517,48 @@ const all_station_data = {
       }
       //get least-distance response
       //Sample: https://backend.delhimetrorail.com/api/v2/en/station_route/NECC/BCGN/least-distance/2022-10-02T19:55:22.182Z
-      
-      const platforms = data.platforms;
+      const metro_lines = data.metro_lines;
+      var platforms = data.platforms;
+      /*
+      "metro_lines": [
+        {
+            "id": 3,
+            "name": "Line 3",
+            "line_color": "Blue Line",
+            "line_code": "LN3",
+            "primary_color_code": "#3b76c0",
+            "secondary_color_code": "#edf5ff",
+            "class_primary": "blue",
+            "class_secondary": null,
+            "start_station": "DWARKA SECTOR - 21",
+            "end_station": "NOIDA ELECTRONIC CITY",
+            "status": "Normal Service"
+        }
+    ]
+      */
+     //platforms -> platform.train_towards.station_name
+
+     //find metro line for every platform
+     platforms = platforms.map((platform) => {
+        const station_name = platform.train_towards.station_name;
+        //match station_name with metro_lines
+        var lineX = {}
+        metro_lines.forEach((line) => {
+            const start_station = line.start_station;
+            const end_station = line.end_station;
+            if (station_name === start_station || station_name === end_station) {
+                lineX = line;
+                //end loop
+                return;
+            }
+         });
+        platform.line = lineX;
+        return platform;
+    });
+    console.log(platforms);
+     
+     
+
       const platform_data = platforms.map(async (platform) => {
         const dest = platform.train_towards.station_code;
         //check if nearest_station is not the destination
