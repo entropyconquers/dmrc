@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/entropyconquers/dmrc/issues"
   },
-  "homepage": "https://github.com/entropyconquers/dmrc#readme"
+  "homepage": "https://github.com/entropyconquers/dmrc#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
