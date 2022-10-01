@@ -8,7 +8,7 @@ app.get('/api', function (req, res) {
 
 
 
-app.get('/api/nearest-station', nearest_station);
+app.use('/api/nearest-station', nearest_station);
 
 
 
