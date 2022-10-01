@@ -1486,7 +1486,6 @@ const all_station_data = {
   }
   
   async function nearest_station (req, res) {
-      try{
       const input_lat = req.query.lat;
       const input_long = req.query.long;
       const line = req.query.line;
@@ -1545,10 +1544,7 @@ const all_station_data = {
       const platform_data_all = await Promise.all(platform_data);
       dataX.platforms = platform_data_all;
       res.status(200).send(dataX);
-      } catch (err) {
-          console.log(err);
-          res.status(500).send(err);
-      }
+      
     }
     router.get('/', nearest_station);
     module.exports = router;
